@@ -2,7 +2,8 @@ import css from "./Contact.module.css";
 import { ImAddressBook } from "react-icons/im";
 import { ImPhone } from "react-icons/im";
 import { useDispatch } from "react-redux";
-import { deleteContact } from "../../redux/contactsSlice";
+import { deleteContact } from "../../redux/contactsOps";
+import toast from "react-hot-toast";
 
 export default function Contact({ data }) {
   const dispatch = useDispatch();
@@ -20,7 +21,15 @@ export default function Contact({ data }) {
         </div>
       </div>
 
-      <button onClick={() => dispatch(deleteContact(data.id))} className={css.button}>
+      <button
+        onClick={() =>
+          dispatch(deleteContact(data.id))
+            .unwrap()
+            .then(() => {
+              toast("The contact has been successfully removed from the list!");
+            })
+        }
+        className={css.button}>
         Delete
       </button>
     </div>
