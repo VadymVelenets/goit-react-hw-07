@@ -33,7 +33,7 @@ const contactsSlice = createSlice({
         state.loading = false;
       })
       .addCase(addContact.fulfilled, (state, action) => {
-        state.items.push = action.payload;
+        state.items.push(action.payload);
         state.loading = false;
       })
       .addCase(deleteContact.pending, (state) => {
